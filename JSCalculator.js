@@ -19,7 +19,7 @@ $('body').append($textArea);
 displayString="";
 
 makeButtons=function(){ //append button elements to body
-textArray=[9,8,'C',7,6,5,4,'*',3,2,1,'/',0,'+','-','.'];
+textArray=[9,8,7,'%',6,5,4,'*',3,2,1,'/',0,'+','-','.'];
   for (var i=0; i<textArray.length; i++){//lay the buttons out in rows of 4
     if(i%4===0){
       var br=$('<br>');
@@ -36,7 +36,10 @@ textArray=[9,8,'C',7,6,5,4,'*',3,2,1,'/',0,'+','-','.'];
 var $equalsButton = $('<button>');
   $equalsButton.text("=");
   $equalsButton.addClass('opButton');
- $($equalsButton).insertAfter($equalsButton);
+  $equalsButton.click(function(e){
+    console.log(eval(displayString));
+  })
+     $('body').append($equalsButton);
 
  var $clearButton = $('<button>');
    $clearButton.text("C");
