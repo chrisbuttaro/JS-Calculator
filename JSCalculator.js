@@ -14,49 +14,46 @@
 // [ ]: Handles decimals
 // [ ]: Users can enter values/perform math with keyboard input (keypress)
 
+var $textArea = $('<input>');
+$('body').append($textArea);
+displayString="";
 
-
-makeButtons=function(){
-  for (var i=9; i>-1; i--){
-    if(i%3===0){
+makeButtons=function(){ //append button elements to body
+textArray=[9,8,'C',7,6,5,4,'*',3,2,1,'/',0,'+','-','.'];
+  for (var i=0; i<textArray.length; i++){//lay the buttons out in rows of 4
+    if(i%4===0){
       var br=$('<br>');
       $('body').append(br);
     }
-    var $numButton = $('<button>');
-    $numButton.addClass('numButton');
-    $numButton.text(i);
+    var $numButton=$('<button>');
+    $numButton.addClass('displayButton');
+    $numButton.text(textArray[i]);
     $numButton.attr('id', i);
     $('body').append($numButton);
-  }
 
-var $plusButton = $('<button>');
-$plusButton.text("+");
-$($plusButton).insertAfter('#0');
-
-var $minusButton = $('<button>');
-  $minusButton.text("-");
-$($minusButton).insertAfter($plusButton);
+  }//end for
 
 var $equalsButton = $('<button>');
   $equalsButton.text("=");
- $($equalsButton).insertAfter($minusButton);
-
-var $divideButton = $('<button>');
-  $divideButton.text("/");
- $($divideButton).insertAfter('#1');
-
-var $multButton = $('<button>');
-  $multButton.text("*");
- $($multButton).insertAfter('#4');
+  $equalsButton.addClass('opButton');
+ $($equalsButton).insertAfter($equalsButton);
 
  var $clearButton = $('<button>');
    $clearButton.text("C");
-  $($clearButton).insertAfter('#7');
+   $clearButton.addClass('opButton');
+  //$($clearButton).insertAfter('#7');
 
-}
+  var buttons=$('.displayButton');
+  buttons.each(function(){
+  $(this).click(function(e){//on click add button html to displayString and display in textArea
+      displayString += $(this).html();
+      $textArea.val(displayString);
+    });//end click()
+   });//end each()
 
-var $textArea = $('<input>');
-$textArea.val('hello');
-$('body').append($textArea);
+}//end makeButtons
+
+
+
 
 makeButtons();
