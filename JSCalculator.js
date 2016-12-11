@@ -1,12 +1,8 @@
 
 // Minimum Requirements
-// [ ]: The calculator has a screen which displays numbers input by the user, or a summed total based on mathematical operations
-// [ ]: The calculator has buttons (0-9, +, -, /, *, ., =, C)
-// [ ]: The calculator can perform the following operations (i.e. is a working calculator:
-// addition
-// subtraction
-// division
-// multiplication
+
+
+
 // [ ]: The 'C' button clears the running total/entered value (works like a clear button).
 // [ ]: = returns the sum of the current operation
 // [ ]: All calculator buttons are assigned click events which result in some action being performed (be it updating the displayed value, or performing math)
@@ -14,12 +10,32 @@
 // [ ]: Handles decimals
 // [ ]: Users can enter values/perform math with keyboard input (keypress)
 
+displayString="";
+fireEQ=function(){$textArea.val('');
+$textArea.val(eval(displayString));
+displayString=eval(displayString).toString();
+}
+fireClear=function(){displayString='';
+$textArea.val('');
+}
+
+$('body').keydown(function(e){
+  console.log(e.which);
+  if(e.which<58 && e.which>47 || e.key==='/' || e.key==='+'|| e.key==='*'){
+    displayString+=e.key;
+    $textArea.val(displayString);
+  }else if(e.key==='='){
+    fireEQ();
+  }else if(e.key==='c'){
+    fireClear();
+  }
+});
+
 var $textArea = $('<input>');
 $('body').append($textArea);
-displayString="";
 
 makeButtons=function(){ //append button elements to body
-textArray=[9,8,7,'%',6,5,4,'*',3,2,1,'/',0,'+','-','.'];
+textArray=[9,8,7,'%',6,5,4,'*',3,2,1,'/',0,'+','-','.','(',')'];
   for (var i=0; i<textArray.length; i++){//lay the buttons out in rows of 4
     if(i%4===0){
       var br=$('<br>');
@@ -34,16 +50,20 @@ textArray=[9,8,7,'%',6,5,4,'*',3,2,1,'/',0,'+','-','.'];
   }//end for
 
 var $equalsButton = $('<button>');
-  $equalsButton.text("=");
-  $equalsButton.addClass('opButton');
+  $equalsButton.text('=');
+  $equalsButton.addClass('eqButton');
   $equalsButton.click(function(e){
-    console.log(eval(displayString));
+    fireEQ();
   })
      $('body').append($equalsButton);
 
  var $clearButton = $('<button>');
-   $clearButton.text("C");
-   $clearButton.addClass('opButton');
+   $clearButton.text('C');
+   $clearButton.addClass('cButton');
+   $clearButton.click(function(e){
+     fireClear();
+   });
+   $('body').append($clearButton);
   //$($clearButton).insertAfter('#7');
 
   var buttons=$('.displayButton');
