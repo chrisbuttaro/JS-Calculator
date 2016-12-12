@@ -56,6 +56,10 @@ var $equalsButton = $('<button>');
    $clearButton.text('C');
    $clearButton.addClass('cButton');
    $clearButton.click(function(e){
+     http://themushroomkingdom.net/sounds/wav/smb/smb_kick.wav
+     var audio = new Audio("http://themushroomkingdom.net/sounds/wav/smb/smb_kick.wav");
+
+     audio.play();
      fireClear();
    });
    $('body').append($clearButton);
@@ -73,8 +77,5 @@ audio.play();
    });//end each()
 
 }//end makeButtons
-
-
-
 
 makeButtons();

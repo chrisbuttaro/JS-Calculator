@@ -6,9 +6,10 @@ background-size: 100%;
 }
 
 .displayButton{
-    width:60px;
-    height:60px;
-    font-family: 'Arial Rounded MT Bold';
+    width:80px;
+    height:80px;
+    font-size:16px;
+  font-family: 'Arial Rounded MT Bold';
     color: white;
     background-color: #2ECC71;
 text-align:center;
@@ -16,23 +17,27 @@ text-align:center;
 
 }
 .eqButton{
-  width:60px;
-  height:60px;
+  width:80px;
+  height:80px;
+  font-size:16px;
   font-family: 'Arial Rounded MT Bold';
   background-color: #00B2FF;
 text-align:center;
 }
 .cButton{
-  width:60px;
-  height:60px;
+  width:80px;
+  height:80px;
+  font-size:16px;
   font-family: 'Arial Rounded MT Bold';
 text-align:center;
 background-color: #FFC300;
 }
 input{
-  width:232px;
-  height:60px;
+  width:350px;
+  height:80px;
+  font-size:16px;
   font-family: 'Arial Rounded MT Bold';
+  background-color: #2ECC71;
 text-align:center;
 
 }
