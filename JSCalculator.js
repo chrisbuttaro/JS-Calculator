@@ -1,17 +1,23 @@
 
 var displayString=""; //holds the vaules entered by the user i.e. 1+1
 fireEQ=function(){$textArea.val('');//called by equals button and equals key
-$textArea.val(eval(displayString));//evaulates & dispalys displayString;
+$textArea.val(eval(displayString));//evaulates & dispalys displayString
 displayString=eval(displayString);//overwrites displayString with the evaluated value
+var audio = new Audio("http://themushroomkingdom.net/sounds/wav/smb/smb_pipe.wav");//adds Mario themed sounds
+audio.play();
 }
 fireClear=function(){displayString='';//clears running total, called by clear button and C key
 $textArea.val('');//clears text area
+var audio = new Audio("http://themushroomkingdom.net/sounds/wav/smb/smb_kick.wav");
+audio.play();
 }
 
 $('body').keydown(function(e){//listens for numeric and operator keystrokes
-  if(e.which<58 && e.which>47 || e.key==='/' || e.key==='+'|| e.key==='*'){
+  if(e.which<58 && e.which>47 || e.key==='-' || e.key==='/' || e.key==='+'|| e.key==='*' || e.key==='.'){
     displayString+=e.key;
     $textArea.val(displayString);
+    var audio = new Audio("http://themushroomkingdom.net/sounds/wav/smb/smb_stomp.wav");//audio on button keydown
+    audio.play();
   }else if(e.key==='='){
     fireEQ();
   }else if(e.key==='c'){
@@ -31,8 +37,7 @@ makeButtons=function(){ //creates & appends button elements to body
 textArray=[9,8,7,'%',6,5,4,'*',3,2,1,'/',0,'+','-','.','(',')'];
   for (var i=0; i<textArray.length; i++){//lays the buttons out in rows of 4
     if(i%4===0){
-      var br=$('<br>');
-      $('body').append(br);
+    $('body').append('<br>');
     }
     var $numButton=$('<button>');
     $numButton.addClass('displayButton');
@@ -42,12 +47,20 @@ textArray=[9,8,7,'%',6,5,4,'*',3,2,1,'/',0,'+','-','.','(',')'];
 
   }//end for
 
+  var buttons=$('.displayButton');
+  buttons.each(function(){
+  $(this).click(function(e){//on click add display button html to displayString and display in textArea
+var audio = new Audio("http://themushroomkingdom.net/sounds/wav/smb/smb_stomp.wav"); //audio on button click
+audio.play();
+      displayString += $(this).html();
+      $textArea.val(displayString);
+    });//end click()
+   });//end each()
+
 var $equalsButton = $('<button>');
   $equalsButton.text('=');
   $equalsButton.addClass('eqButton');
   $equalsButton.click(function(e){
-    var audio = new Audio("http://themushroomkingdom.net/sounds/wav/smb/smb_pipe.wav" ) ;
-    audio.play();
     fireEQ();
   })
      $('body').append($equalsButton);
@@ -57,24 +70,9 @@ var $equalsButton = $('<button>');
    $clearButton.addClass('cButton');
    $clearButton.click(function(e){
      http://themushroomkingdom.net/sounds/wav/smb/smb_kick.wav
-     var audio = new Audio("http://themushroomkingdom.net/sounds/wav/smb/smb_kick.wav");
-
-     audio.play();
      fireClear();
    });
    $('body').append($clearButton);
-
-
-  var buttons=$('.displayButton');
-  buttons.each(function(){
-  $(this).click(function(e){//on click add display button html to displayString and display in textArea
-
-var audio = new Audio("http://themushroomkingdom.net/sounds/wav/smb/smb_stomp.wav" ) ;
-audio.play();
-      displayString += $(this).html();
-      $textArea.val(displayString);
-    });//end click()
-   });//end each()
 
 }//end makeButtons
 
